@@ -1,28 +1,10 @@
 import React, { Component } from 'react';
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-import reducers from './reducer';
-import { fetchBear } from './actions';
-
-const createStoreWithMiddleWare = applyMiddleware(thunk)(createStore);
-
-let store = createStoreWithMiddleWare(reducers);
+import { connect } from 'react-redux';
 
 class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {data: []}
-  }
-
-  componentDidMount() {
-    store.subscribe( () => {
-      this.setState( {data: store.getState().bear} )
-    })
-    store.dispatch(fetchBear())
-  }
-
+  
   render() {
-    let bears = this.state.data
+    let bears = this.props.bear
     return (
       <div>
         {
@@ -33,4 +15,8 @@ class App extends Component {
   }
 }
 
-export default App;
+let mapStateToProps = (state) => (
+  {  bear: state.bear }
+);
+
+export default connect(mapStateToProps)(App);
