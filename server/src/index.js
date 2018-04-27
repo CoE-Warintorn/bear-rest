@@ -19,11 +19,11 @@ router.route('/bears')
         bear.name = req.body.name;
         bears.push(bear);
         res.json({ message: 'Bear created!' });
-    });
+    })
 
 router.route('/bears/:id')
     .delete(function (req, res) {
-        bears = bears.filter(b => b.id !== req.param.id)
+        bears = bears.filter(b => b.id !== req.params.id)
         res.json({ message: 'Bear deleted!' })
     });
 

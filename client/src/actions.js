@@ -8,3 +8,12 @@ export function fetchBear () {
             })
     }
 }
+
+export function deleteBear(id) {
+    return (dispatch) => {
+        axios.delete(`http://localhost:8000/api/bears/${id}`)
+        .then(() => {
+            dispatch(fetchBear())
+        })
+    }
+}
